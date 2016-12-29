@@ -1,6 +1,14 @@
 function [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE)
 %BPNN bpnn training
-%   
+%   netV -- The weight from input layer to hidden layer after training
+%   netW -- The weight from hidden layer to output layer after training
+%   netR -- The bias of hidden layer after training
+%   netA -- The bias of output layer after training
+%   traindata -- training data
+%   trainlabel -- the label of training data
+%   eta -- The learning rate
+%   maxIte -- The maximum number of iterations
+%   targetE -- Stop iterating when error less than minE 
 
     [m,n] = size(traindata);
     y = zeros(m,33);

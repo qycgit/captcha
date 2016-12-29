@@ -1,20 +1,20 @@
 function [ letters ] = binaryPartition( img, num )
-%binaryPartition 二值化并分割图片
+%binaryPartition image binaryzation and partition
 %   letters -- result array a row is a letter
 %   img -- image
 %   num -- the number of letters
 
     letters = zeros(num,400);
-    img = rgb2gray(img);%灰度化
-    img = im2bw(img);%0-1二值化
-    img = 1-img;%颜色反转，方便去除噪点
+    img = rgb2gray(img);%gray
+    img = im2bw(img);%0-1 binaryzation
+    img = 1-img;%Color reversal, to facilitate removal of noise
     points=partitionPoint(img,num);
     for j = 0:num-1
         region = [points(j+1,1),1,points(j+1,2),20];
         subimg = imcrop(img,region);
         imlabel = bwlabel(subimg);
         m=max(max(imlabel));
-        if m>1 % 连通区域数大于1，说明有噪点，要去除
+        if m>1 % The number of connected regions is greater than 1, indicating noise to be removed
             stats = regionprops(imlabel,'Area');
             area = cat(1,stats.Area); 
             maxindex = find(area == max(area));
@@ -22,14 +22,16 @@ function [ letters ] = binaryPartition( img, num )
             for ii=1:m-1
                 secondindex = find(area == max(area));        
                 imindex = ismember(imlabel,secondindex);
-                subimg(imindex==1)=0;%去掉第二大连通域，噪点不可能比字符大，所以第二大的就是噪点
+                %Remove the second largest connected domain, the noise can not be larger than the characters
+                subimg(imindex==1)=0;
             end
         end
+        %Resize the image to 20*20
         subimg = resizeImg(subimg);
         minwidth = 20;
-        %左右60度旋转图片，取字符宽度最小的角度
+        %Rotate the image around 60 degrees, taking the smallest angle of the character width
         for angle = -60:60
-            imgr=imrotate(subimg,angle,'bilinear','crop');%crop 避免图像大小变化
+            imgr=imrotate(subimg,angle,'bilinear','crop');
             imlabel = bwlabel(imgr);
             stats = regionprops(imlabel,'Area');
             area = cat(1,stats.Area);

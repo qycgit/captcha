@@ -1,21 +1,21 @@
 function [ netV,netW,netR,netA,trainE] = BPNeuralNet( x,y,v,w,r,a,eta,maxIte,targetE)
 %[ netV,netW,netR,netA ]=BPNeuralNet(x,y,v,w,r,a,eta,maxIte,minE) 
-% Three-layer backpropagation neural network function.The activation
-% functions of hidden layer and output layer are sigmoid function.
-% x The input data;
-% y The real output data;
-% v The initial weight from input layer to hidden layer;
-% w The initial weight from hidden layer to output layer;
-% r The initial threshold of hidden layer;
-% a The initial threshold of output layer;
-% eta The learning rate;
-% maxIte The maximum number of iterations;
-% targetE Stop iterating when error less than minE ;
-% netV The weight from input layer to hidden layer after training;
-% netW The weight from hidden layer to output layer after training;
-% netR The bias of hidden layer after training;
-% netA The bias of output layer after training.
-% trainE The training error.
+%   Three-layer backpropagation neural network function.The activation
+%   functions of hidden layer and output layer are sigmoid function.
+%   x -- The input data;
+%   y -- The real output data;
+%   v -- The initial weight from input layer to hidden layer;
+%   w -- The initial weight from hidden layer to output layer;
+%   r -- The initial threshold of hidden layer;
+%   a -- The initial threshold of output layer;
+%   eta -- The learning rate;
+%   maxIte -- The maximum number of iterations;
+%   targetE -- Stop iterating when error less than minE ;
+%   netV -- The weight from input layer to hidden layer after training;
+%   netW -- The weight from hidden layer to output layer after training;
+%   netR -- The bias of hidden layer after training;
+%   netA -- The bias of output layer after training.
+%   trainE -- The training error.
 % 
 
 n=size(x,1);

@@ -1,6 +1,11 @@
 function [ result ] = BPNNPre( letters,netV,netW,netR,netA)
 %BPNNPre bpnn prediction
-%   此处显示详细说明
+%   result -- result
+%   letters -- letters to recognize
+%   netV -- The weight from input layer to hidden layer
+%   netW -- The weight from hidden layer to output layer
+%   netR -- The bias of hidden layer
+%   netA -- The bias of output layer
 
     x1=letters*netV;
     y1=1./(1+exp(-(x1-netR)));

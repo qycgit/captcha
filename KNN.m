@@ -1,6 +1,10 @@
 function [ result ] = KNN( letters, traindata, trainlabel, k)
-%KNN 此处显示有关此函数的摘要
-%   此处显示详细说明
+%KNN KNN function
+%   result -- result
+%   letters -- letters to recognize
+%   traindata -- training data
+%   trainlabel -- the label of training data
+%   k -- k nearest neighbors
 
     klabel = char(k);
     kdistance = zeros(k,1);

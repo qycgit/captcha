@@ -22,7 +22,7 @@ n=length(DIRS);
 
 %bpnn training
 eta=0.1;
-maxIte=1000;
+maxIte=5000;
 targetE=1e-5;
 % traindata=mapminmax(traindata')'
 [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);

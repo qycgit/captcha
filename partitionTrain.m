@@ -12,7 +12,6 @@ for i=1:n
         img = 1-img;%颜色反转让字符成为联通域，方便去除噪点
         points=partitionPoint(img,4);
         for j = 0:3
-%             region = [j*20+1,1,19,20];%把一张验证码分成四个20*20大小的字符图片
             region = [points(j+1,1),1,points(j+1,2),20];
             subimg = imcrop(img,region);
             imlabel = bwlabel(subimg);

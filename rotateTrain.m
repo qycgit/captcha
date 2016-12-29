@@ -17,7 +17,7 @@ for i=1:n
             area = cat(1,stats.Area);
             maxindex = find(area == max(area));
             imindex = ismember(imlabel,maxindex);%最大连通域为1
-            [y,x] = find(imindex==1);
+            [~,x] = find(imindex==1);
             width = max(x)-min(x)+1;
             if width<minwidth
                 minwidth = width;

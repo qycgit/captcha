@@ -16,14 +16,10 @@ function [ result ] = KNN( letters, traindata, trainlabel, k)
         end
         
         for j=1:total
+            %calculate distance between two letter
             d = abs(traindata(j,:)-letters(i,:));
             d = sum(d);
-            %calculate distance between two letter
-%             for l=1:m
-%                 if traindata(j,l) ~= letters(i,l)
-%                     d = d+1;
-%                 end
-%             end
+            
             %k nearest neighbor
             tlabel = trainlabel(j);
             for l=1:k
@@ -36,6 +32,20 @@ function [ result ] = KNN( letters, traindata, trainlabel, k)
                     tlabel = ltemp;
                 end
             end
+        end
+        
+        lmap = containers.Map();
+        dmap = containers.Map();
+        dsum = 0;
+        for j=1:k
+            if lmap.isKey(klabel(j))
+                dmap(klabel(j)) = dmap(klabel(j)) + kdistance(j);
+                lmap(klabel(j)) = lmap(klabel(j))+1;
+            else
+                dmap(klabel(j)) = kdistance(j);
+                lmap(klabel(j)) = 1;
+            end
+            dsum = dsum + kdistance(j);
         end
         ta = tabulate(klabel(:));
         [~,index] = max([ta{:,2}]);

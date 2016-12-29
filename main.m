@@ -15,20 +15,51 @@ for i=1:n
     end
 end
 
+
 %test
 DIRS=dir([testDir,'*.jpg']);
 n=length(DIRS);
-sum = 0;
+
+%bpnn training
+eta=0.01;
+maxIte=2000;
+targetE=1e-5;
+[ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);
+
+knnsum = 0;
+knnsumsingle = 0;
+BPnnsum = 0;
+BPnnsumsingle = 0;
 for i=1:n
     if ~DIRS(i).isdir
         img = imread(strcat(testDir,DIRS(i).name ));
         letters = binaryPartition(img,4);
-%         imshow(letters{1,1});
-        result = KNN(letters,traindata, trainlabel,5);
-        disp(['result:',result,'real:',DIRS(i).name(1:4)]);
-        if strcmp(result,DIRS(i).name(1:4))
-            sum = sum+1;
+        
+        %knn
+%         knnresult = KNN(letters,traindata, trainlabel,1);
+%         if strcmp(knnresult,DIRS(i).name(1:4))
+%             knnsum = knnsum+1;
+%         end
+%         for j = 1:4
+%             if strcmp(knnresult(j),DIRS(i).name(j))
+%                 knnsumsingle = knnsumsingle+1;
+%             end
+%         end
+        
+        %bpnn
+        bpnnresult = BPNNPre(letters,netV,netW,netR,netA);
+        if strcmp(bpnnresult,DIRS(i).name(1:4))
+            BPnnsum = BPnnsum+1;
         end
+        for j = 1:4
+            if strcmp(bpnnresult(j),DIRS(i).name(j))
+                BPnnsumsingle = BPnnsumsingle+1;
+            end
+        end
+        
     end
 end
-sum
+
+
+
+

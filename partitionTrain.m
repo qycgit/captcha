@@ -27,7 +27,7 @@ for i=1:n
                     subimg(imindex==1)=0;%去掉第二大连通域，噪点不可能比字符大，所以第二大的就是噪点
                 end
             end
-            name = strcat(lettersdir,DIRS(i).name(j+1),'_',num2str(i*4+j),'.jpg');
+            name = strcat(lettersdir,DIRS(i).name(j+1),'.jpg');
             subimg = resizeImg(subimg);
             imwrite(subimg,name);
         end

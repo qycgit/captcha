@@ -23,7 +23,7 @@ function [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targ
     %initialization
     v=rand(inputLayer,hiddenLayer);
     w=rand(hiddenLayer,outputLayer);
-    r=rand(1,hiddenLayer);
+    r=rand(1,hiddenLayer)+30;
     a=rand(1,outputLayer);
     [ netV,netW,netR,netA]=BPNeuralNet(traindata,y,v,w,r,a,eta,maxIte,targetE);
 end

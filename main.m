@@ -21,9 +21,10 @@ DIRS=dir([testDir,'*.jpg']);
 n=length(DIRS);
 
 %bpnn training
-eta=0.01;
-maxIte=2000;
+eta=0.1;
+maxIte=1000;
 targetE=1e-5;
+% traindata=mapminmax(traindata')'
 [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);
 
 knnsum = 0;
@@ -48,6 +49,7 @@ for i=1:n
         
         %bpnn
         bpnnresult = BPNNPre(letters,netV,netW,netR,netA);
+        disp(['result:',bpnnresult,'real:',DIRS(i).name(1:4)]);
         if strcmp(bpnnresult,DIRS(i).name(1:4))
             BPnnsum = BPnnsum+1;
         end
@@ -56,7 +58,6 @@ for i=1:n
                 BPnnsumsingle = BPnnsumsingle+1;
             end
         end
-        
     end
 end
 

@@ -33,20 +33,6 @@ function [ result ] = KNN( letters, traindata, trainlabel, k)
                 end
             end
         end
-        
-        lmap = containers.Map();
-        dmap = containers.Map();
-        dsum = 0;
-        for j=1:k
-            if lmap.isKey(klabel(j))
-                dmap(klabel(j)) = dmap(klabel(j)) + kdistance(j);
-                lmap(klabel(j)) = lmap(klabel(j))+1;
-            else
-                dmap(klabel(j)) = kdistance(j);
-                lmap(klabel(j)) = 1;
-            end
-            dsum = dsum + kdistance(j);
-        end
         ta = tabulate(klabel(:));
         [~,index] = max([ta{:,2}]);
         result(i) = ta{index,1};

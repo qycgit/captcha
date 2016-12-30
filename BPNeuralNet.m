@@ -45,6 +45,7 @@ for i=1:maxIte
     x2=y1*w;
     y2=1./(1+exp(-(x2-a)));
     trainE=mean(0.5*sum(((y-y2).^2),2));
+    %prompt per 100 times
     if rem(i,100)==0
         disp(trainE);
         disp(i);

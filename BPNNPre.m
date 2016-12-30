@@ -16,7 +16,6 @@ function [ result ] = BPNNPre( letters,netV,netW,netR,netA)
     for i = 1:4
         if temp(i)<=8
             result(i)=char(temp(i)+'1');
-            
         elseif temp(i)<=16
             result(i)=char(temp(i)+7+'1');
         else

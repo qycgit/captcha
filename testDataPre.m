@@ -1,5 +1,4 @@
-% function [resultTable,testImgs,resultLabels] = testDataPre(trainFlag)
-trainFlag=true;
+function [resultTable,testImgs,resultLabels] = testDataPre(trainFlag)
 %Calculate the results of the test data
 %resultTable -- the accuracy rate of each method 
 %testImgs -- test data
@@ -33,10 +32,10 @@ resultLabels = cell(n,2);
 
 if trainFlag
     %bpnn training
-%     eta=0.05;
-%     maxIte=8000;
-%     targetE=1e-5;
-%     [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);
+    eta=0.05;
+    maxIte=100;
+    targetE=1e-5;
+    [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);
 
     %CNN training
     opts.alpha = 1;
@@ -60,29 +59,29 @@ for i=1:n
         testImgs{i,1}=img;
         letters = binaryPartition(img,4);
         
-%         %knn
-%         knnresult = KNN(letters,traindata, trainlabel,1);
-%         resultLabels{i,1} = knnresult;
-%         if strcmp(knnresult,DIRS(i).name(1:4))
-%             knnsum = knnsum+1;
-%         end
-%         for j = 1:4
-%             if strcmp(knnresult(j),DIRS(i).name(j))
-%                 knnsumsingle = knnsumsingle+1;
-%             end
-%         end
-%         
-%         %bpnn
-%         bpnnresult = BPNNPre(letters,netV,netW,netR,netA);
-%         resultLabels{i,2} = bpnnresult;
-%         if strcmp(bpnnresult,DIRS(i).name(1:4))
-%             BPnnsum = BPnnsum+1;
-%         end
-%         for j = 1:4
-%             if strcmp(bpnnresult(j),DIRS(i).name(j))
-%                 BPnnsumsingle = BPnnsumsingle+1;
-%             end
-%         end
+        %knn
+        knnresult = KNN(letters,traindata, trainlabel,1);
+        resultLabels{i,1} = knnresult;
+        if strcmp(knnresult,DIRS(i).name(1:4))
+            knnsum = knnsum+1;
+        end
+        for j = 1:4
+            if strcmp(knnresult(j),DIRS(i).name(j))
+                knnsumsingle = knnsumsingle+1;
+            end
+        end
+        
+        %bpnn
+        bpnnresult = BPNNPre(letters,netV,netW,netR,netA);
+        resultLabels{i,2} = bpnnresult;
+        if strcmp(bpnnresult,DIRS(i).name(1:4))
+            BPnnsum = BPnnsum+1;
+        end
+        for j = 1:4
+            if strcmp(bpnnresult(j),DIRS(i).name(j))
+                BPnnsumsingle = BPnnsumsingle+1;
+            end
+        end
         
         %CNN
         cnnresult = CNNPre(letters,cnn);
@@ -104,11 +103,13 @@ knnsum = knnsum/n;
 knnsumsingle = knnsumsingle/(n*4);
 BPnnsum = BPnnsum/n;
 BPnnsumsingle = BPnnsumsingle/(n*4);
+cnnsum = cnnsum/n;
+cnnsumsingle = cnnsumsingle/(n*4);
 %gui result table
-resultTable = {knnsumsingle knnsum n; BPnnsumsingle BPnnsum n};
-cnnsumsingle
-cnnsum
-% end
+resultTable = {knnsumsingle knnsum n; 
+               BPnnsumsingle BPnnsum n;
+               cnnsumsingle cnnsum n};
+end
 
 
 

@@ -1,6 +1,6 @@
 function [ result ] = CNNPre( letters,cnn)
-%myCNNPre 此处显示有关此函数的摘要
-%   此处显示详细说明
+%CNNPre use trained model to predict
+%   
 
     letters = reshape(letters',20,20,4);
     cnn = cnnff(cnn,letters);

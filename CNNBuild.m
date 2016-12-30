@@ -1,6 +1,6 @@
 function [ cnn ] = CNNBuild( traindata,trainlabel,opts)
-%myCNNBuild 此处显示有关此函数的摘要
-%   此处显示详细说明
+%CNNBuild build and train cnn model
+%   
 
     m = size(traindata,1);
     %output data init

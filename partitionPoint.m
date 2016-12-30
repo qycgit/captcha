@@ -1,6 +1,8 @@
 function [ points ] = partitionPoint( img ,num)
-%PARTITIONPOINT 此处显示有关此函数的摘要
-%   此处显示详细说明
+%PARTITIONPOINT find partiton point use CFS,Connected field segmentation
+%   points -- partiton points
+%   img -- image
+%   num -- the number of letters
 
    temp = [];
    imlabel = bwlabel(img);

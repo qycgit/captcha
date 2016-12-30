@@ -1,4 +1,6 @@
-mydir='.\captcha\';
+%creat training data
+% gray and binaryzation
+33mydir='.\captcha\';
 bw = '.\bw\';
 if exist(bw,'dir')==0
     mkdir(bw)
@@ -8,8 +10,8 @@ n=length(DIRS);
 for i=1:n
     if ~DIRS(i).isdir
         img = imread(strcat(mydir,DIRS(i).name ));
-        img = rgb2gray(img);%
-        img = im2bw(img);%0-1¶þÖµ»¯
+        img = rgb2gray(img);%gray
+        img = im2bw(img);%0-1 binaryzation
         name = strcat(bw,DIRS(i).name);
         imwrite(img,name);
     end

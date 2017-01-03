@@ -32,15 +32,15 @@ resultLabels = cell(n,2);
 
 if trainFlag
     %bpnn training
-    eta=0.05;
-    maxIte=100;
+    eta=0.2;
+    maxIte=16000;
     targetE=1e-5;
     [ netV,netW,netR,netA] = BPNNTrain(traindata,trainlabel,eta,maxIte,targetE);
 
     %CNN training
-    opts.alpha = 1;
+    opts.alpha = 0.2;
     opts.batchsize = 50;
-    opts.numepochs = 100;
+    opts.numepochs = 11000;
     cnn = CNNBuild(traindata,trainlabel,opts);
 else
     load('bpnn.mat');

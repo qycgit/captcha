@@ -1,6 +1,6 @@
 %creat training data
 % gray and binaryzation
-33mydir='.\captcha\';
+mydir='.\captcha\';
 bw = '.\bw\';
 if exist(bw,'dir')==0
     mkdir(bw)

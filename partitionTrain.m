@@ -30,7 +30,7 @@ for i=1:n
                     subimg(imindex==1)=0;
                 end
             end
-            name = strcat(lettersdir,DIRS(i).name(j+1),'.jpg');
+            name = strcat(lettersdir,DIRS(i).name(j+1),'_',num2str(i*4+j),'.jpg');
             %Resize the image to 20*20
             subimg = resizeImg(subimg);
             imwrite(subimg,name);
